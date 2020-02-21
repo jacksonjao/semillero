@@ -59,7 +59,7 @@ export class DetalleProductoComponent implements OnInit {
     this.modalEditar = M.Modal.init(this.modalEditarRef.nativeElement, {});
     this.modalVender = M.Modal.init(this.modalVenderRef.nativeElement, {});
     this.router.params.subscribe((param: any) => {
-      this.service.getProductoById(param.id).subscribe(data => {
+      this.service.getProductoById(param.id).subscribe((data: any) => {
         this.producto = data;
         this.venta.idProducto = this.producto.id;
         this.venta.detallePedido = this.producto.descripcionProducto;
@@ -70,7 +70,7 @@ export class DetalleProductoComponent implements OnInit {
   guardar(input: HTMLInputElement) {
     console.log(input.value);
     console.log(this.formEditarProducto.value);
-    this.service.updateProducto(this.producto.id, this.formEditarProducto.value).subscribe(response => {
+    this.service.updateProducto(this.formEditarProducto.value).subscribe(response => {
       window.alert('Se actualizó correctamente');
       this.modalEditar.close();
     },

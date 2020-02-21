@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Cliente} from '../../models/cliente';
 import {FormBuilder} from '@angular/forms';
 import * as M from '../../../assets/js/materialize';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'app-lista-clientes',
@@ -16,7 +17,7 @@ export class ListaClientesComponent implements OnInit {
   clientes: Cliente[] = [];
   formCrear: any;
   clienteSeleccionado: Cliente = {nombreCliente: '', cedulaCliente: ''};
-  constructor( private formBuilder: FormBuilder) {
+  constructor( private formBuilder: FormBuilder,  private service: AppService) {
 
     this.formCrear = formBuilder.group({
       cedulaCliente: '',
@@ -35,6 +36,10 @@ export class ListaClientesComponent implements OnInit {
         nombreCliente: 'Nombre' + i
       });
     }
+
+    this.service.getProductos().subscribe((response: any) => {
+      console.log(response);
+    });
 
   }
 

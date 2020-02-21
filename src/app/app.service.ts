@@ -17,18 +17,18 @@ export class AppService {
   // Productos
 
   getProductos() {
-    return this.httpClient.get<Producto>(`${this.API}/producto/consultar`);
+    return this.httpClient.get(`${this.API}/producto/consultar`);
   }
 
   getProductoById(id: any) {
-    return this.httpClient.get<Producto>(`${this.API}/producto/consultar/${id}`);
+    return this.httpClient.get(`${this.API}/producto/consultar/${id}`);
   }
 
   createProducto(obj: object) {
     return this.httpClient.post(`${this.API}/producto/crear`, obj);
   }
 
-  updateProducto(id: any, obj: object) {
+  updateProducto(obj: object) {
     return this.httpClient.put(`${this.API}/producto/actualizar`, obj);
   }
 
@@ -106,5 +106,11 @@ export class AppService {
     return this.httpClient.delete(`${this.API}/pedido/borrar`, obj);
   }
 
+
+  // reporte
+
+  getReporte(fechasInicial: string, fechasFinal: string ) {
+    return this.httpClient.post(`${this.API}/pedido/consularByFechas`, [fechasInicial, fechasFinal]);
+  }
 
 }
