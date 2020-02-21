@@ -5,6 +5,7 @@ import {FormBuilder} from '@angular/forms';
 import {Venta} from '../../models/vender';
 import {AppService} from '../../app.service';
 import {ActivatedRoute} from '@angular/router';
+import {Precio} from '../../models/precio';
 @Component({
   selector: 'app-detalle-producto',
   templateUrl: './detalle-producto.component.html',
@@ -20,11 +21,12 @@ export class DetalleProductoComponent implements OnInit {
   formEditarProducto: any;
   formVenderProducto: any;
   venta: Venta;
+  idProducto: any;
   constructor( private formBuilder: FormBuilder, private service: AppService, private router: ActivatedRoute) {
     this.initData();
     this.formEditarProducto = this.formBuilder.group({
-      nombre: '',
-      descripcion: '',
+      nombreProducto: '',
+      descripcionProducto: '',
       imagen: ''
     });
 
@@ -58,27 +60,41 @@ export class DetalleProductoComponent implements OnInit {
   ngOnInit() {
     this.modalEditar = M.Modal.init(this.modalEditarRef.nativeElement, {});
     this.modalVender = M.Modal.init(this.modalVenderRef.nativeElement, {});
-    this.router.params.subscribe((param: any) => {
-      this.service.getProductoById(param.id).subscribe((data: any) => {
-        this.producto = data;
-        this.venta.idProducto = this.producto.idProducto;
-        this.venta.detallePedido = this.producto.descripcionProducto;
+    this.idProducto = (this.router.params as any).value.id;
+    this.getProducto();
+  }
+
+  getProducto() {
+    this.service.getProductoById(this.idProducto).subscribe((data: any) => {
+      this.producto = data;
+      this.service.getPreciosById(this.producto.idProducto).subscribe((precio: Precio) => {
+        this.producto.valor = precio.valor;
       });
+      this.venta.idProducto = this.producto.idProducto;
+      this.venta.detallePedido = this.producto.descripcionProducto;
     });
   }
 
   guardar(input: HTMLInputElement) {
-    console.log(input.value);
-    console.log(this.formEditarProducto.value);
     this.service.updateProducto(this.formEditarProducto.value).subscribe(response => {
       window.alert('Se actualizó correctamente');
       this.modalEditar.close();
     },
       error => {window.alert('Ha ocurrido un error al actualizar, revise la consola'), console.log(error); });
+
+    this.service.updatePrecios(this.producto.idProducto, {valor:  input.value});
   }
 
   vender() {
-    console.log(this.venta);
+    this.service.createPedido(this.venta).subscribe(response => {
+      window.alert('Se registró la venta');
+    });
+  }
+
+  eliminar() {
+    this.service.deleteCliente(this.producto).subscribe(response => {
+      window.alert('Se eliminó el producto');
+    });
   }
 
   abrirModalEditar() {

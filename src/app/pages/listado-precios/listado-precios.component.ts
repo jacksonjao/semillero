@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import * as M from '../../../assets/js/materialize';
 import {Precio} from '../../models/precio';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'app-listado-precios',
@@ -16,7 +17,7 @@ export class ListadoPreciosComponent implements OnInit {
   precios: Precio[] = [];
   formCrear: any;
   precioSeleccionado: Precio = {idPrecio: '', valor: ''};
-  constructor( private formBuilder: FormBuilder) {
+  constructor( private formBuilder: FormBuilder, private service: AppService) {
 
     this.formCrear = formBuilder.group({
       idPrecio: '',
@@ -36,9 +37,14 @@ export class ListadoPreciosComponent implements OnInit {
       });
     }
 
+    this.getPrecios();
   }
 
-
+getPrecios() {
+    this.service.getPrecios().subscribe((response: Precio[]) => {
+      this.precios = response;
+    });
+}
   crear() {
   }
   editar(input: HTMLInputElement) {

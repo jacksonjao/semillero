@@ -37,15 +37,30 @@ export class ListaClientesComponent implements OnInit {
       });
     }
 
+    this.getClientes();
+  }
+
+  getClientes() {
+    this.service.getClientes().subscribe((clientes: Cliente[]) => {
+      this.clientes = clientes;
+    });
   }
 
 
   crear() {
+    this.service.createCliente(this.formCrear.values).subscribe(result => {
+      window.alert('Usuario creado satisfactoriamente');
+    });
   }
   editar(input: HTMLInputElement) {
+    this.service.updateCliente(this.clienteSeleccionado.cedulaCliente, {nombreCliente: input.value}).subscribe(result => {
+      window.alert('Usuario creado satisfactoriamente');
+    });
   }
-  borrar (id: any) {
-    console.log(id);
+  borrar() {
+    this.service.deleteCliente(this.clienteSeleccionado).subscribe(result => {
+      window.alert('Usuario creado satisfactoriamente');
+    });
   }
 
 }

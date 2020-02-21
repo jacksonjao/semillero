@@ -7,7 +7,7 @@
     <p>{{producto.descripcionProducto}}</p>
     <p> ${{producto.valor}}</p>
     <br>
-    <button class="waves-effect waves-light btn red">Eliminar</button>
+    <button class="waves-effect waves-light btn red" (click)="eliminar()">Eliminar</button>
     <button (click)="abrirModalEditar()" class="btn" >Editar</button>
     <button (click)="abrirModalVender()" class="waves-effect waves-light btn">Vender</button>
   </section>

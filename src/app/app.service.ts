@@ -41,11 +41,11 @@ export class AppService {
   // Clientes
 
   getClientes() {
-    return this.httpClient.get<Producto>(`${this.API}/cliente/consultar`);
+    return this.httpClient.get(`${this.API}/cliente/consultar`);
   }
 
   getClienteById(id: any) {
-    return this.httpClient.get<Producto>(`${this.API}/cliente/consultar/${id}`);
+    return this.httpClient.get(`${this.API}/cliente/consultar/${id}`);
   }
 
   createCliente(obj: object) {
@@ -64,11 +64,11 @@ export class AppService {
   // Precios
 
   getPrecios() {
-    return this.httpClient.get<Producto>(`${this.API}/precios/consultar`);
+    return this.httpClient.get(`${this.API}/precios/consultar`);
   }
 
   getPreciosById(id: any) {
-    return this.httpClient.get<Producto>(`${this.API}/precios/consultar/${id}`);
+    return this.httpClient.get(`${this.API}/precios/consultar/${id}`);
   }
 
   createPrecios(obj: object) {
@@ -87,11 +87,11 @@ export class AppService {
 // Pedido
 
   getPedido() {
-    return this.httpClient.get<Producto>(`${this.API}/pedido/consultar`);
+    return this.httpClient.get(`${this.API}/pedido/consultar`);
   }
 
   getPedidoById(id: any) {
-    return this.httpClient.get<Producto>(`${this.API}/pedido/consultar/${id}`);
+    return this.httpClient.get(`${this.API}/pedido/consultar/${id}`);
   }
 
   createPedido(obj: object) {
