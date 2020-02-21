@@ -47,15 +47,14 @@ export class ListaProductosComponent implements OnInit {
 
 
   guardar(input: HTMLInputElement) {
-    console.log(input.value);
-    console.log(this.formEditarProducto.value);
     this.service.createProducto(this.formEditarProducto.value).subscribe((response: Producto) => {
       const precio: Precio = {
         idPrecio: response.idProducto,
         valor: input.value
       };
+      window.alert('Se creó el producto');
+      this.getProductos();
       this.service.createPrecios(precio).subscribe(response2 => {
-        window.alert('Se creó el producto');
         this.getProductos();
       });
     });

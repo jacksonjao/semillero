@@ -77,9 +77,8 @@ export class DetalleProductoComponent implements OnInit {
   }
 
   guardar(input: HTMLInputElement) {
-    this.service.updateProducto(this.formEditarProducto.value).subscribe(response => {
+    this.service.updateProducto({...this.formEditarProducto.value, idProducto: this.producto.idProducto}).subscribe(response => {
       window.alert('Se actualizó correctamente');
-      this.modalEditar.close();
     },
       error => {window.alert('Ha ocurrido un error al actualizar, revise la consola'), console.log(error); });
 
