@@ -50,16 +50,19 @@ export class ListaClientesComponent implements OnInit {
 
   crear() {
     this.service.createCliente(this.formCrear.values).subscribe(result => {
+      this.getClientes();
       window.alert('Usuario creado satisfactoriamente');
     });
   }
   editar(input: HTMLInputElement) {
     this.service.updateCliente({cedulaCliente: this.clienteSeleccionado.cedulaCliente, nombreCliente: input.value}).subscribe(result => {
+      this.getClientes();
       window.alert('Usuario creado satisfactoriamente');
     });
   }
   borrar() {
     this.service.deleteCliente(this.clienteSeleccionado).subscribe(result => {
+      this.getClientes();
       window.alert('Usuario creado satisfactoriamente');
     });
   }

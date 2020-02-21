@@ -41,20 +41,7 @@ export class ListaProductosComponent implements OnInit {
 
   getProductos() {
     this.service.getProductos().subscribe((response: Producto[]) => {
-      const productos = response;
-      console.log(response);
-      this.service.getPrecios().subscribe((response2: Precio[]) => {
-        productos.forEach(producto => {
-          for (let i = 0; i < response2.length; i++) {
-          const precio = response2[i];
-          if (producto.idProducto === precio.idPrecio) {
-              producto.valor = precio.valor;
-              break;
-            }
-          }
-        });
-        this.productos = productos;
-      });
+      this.productos = response;
     });
   }
 
