@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'app-reporte',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reporte.component.css']
 })
 export class ReporteComponent implements OnInit {
+ reporte: any;
+  constructor(private service: AppService) {
 
-  constructor() { }
+  }
 
   ngOnInit() {
+    this.service.getReporte()
   }
 
 }
