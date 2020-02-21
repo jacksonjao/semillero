@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AppService} from '../../app.service';
 import {Venta} from '../../models/vender';
+import { reporte } from 'src/app/models/reporte';
 
 @Component({
   selector: 'app-reporte',
@@ -8,7 +9,7 @@ import {Venta} from '../../models/vender';
   styleUrls: ['./reporte.component.css']
 })
 export class ReporteComponent implements OnInit {
- reporte: Venta;
+ reportes: reporte[];
   constructor(private service: AppService) {
 
   }
@@ -17,8 +18,9 @@ export class ReporteComponent implements OnInit {
   }
 
   buscar(inputFechaInicial: HTMLInputElement, inputFechaFinal: HTMLInputElement) {
+    console.log(inputFechaInicial.value+" fechas "+inputFechaFinal.value);
     this.service.getReporte(inputFechaInicial.value, inputFechaFinal.value).subscribe((response: any) => {
-      this.reporte = response;
+      this.reportes = response;
     });
   }
 

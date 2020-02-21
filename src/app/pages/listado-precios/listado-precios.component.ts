@@ -49,6 +49,7 @@ getPrecios() {
     console.log(this.formCrear.values)
     this.service.createPrecios(this.formCrear.values).subscribe(response => {
       window.alert('Se creó satisfactoriamente');
+      
     });
   }
   editar(input: HTMLInputElement) {

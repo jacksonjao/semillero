@@ -22,7 +22,8 @@ export class ListaProductosComponent implements OnInit {
     this.formEditarProducto = this.formBuilder.group({
       nombreProducto: '',
       descripcionProducto: '',
-      imagen: ''
+      imagen: '',
+      precio: 0
     });
   }
 
@@ -41,16 +42,10 @@ export class ListaProductosComponent implements OnInit {
   guardar(input: HTMLInputElement) {
     if (this.formEditarProducto.value.nombreProducto !== '' && this.formEditarProducto.value.descripcionProducto !== '') { }
     {
-    this.service.createProducto(this.formEditarProducto.value).subscribe((response: Producto) => {
-      const precio: Precio = {
-        idPrecio: response.idProducto,
-        valor: input.value
-      };
+      console.log(this.formEditarProducto.value);
+    this.service.createProducto(this.formEditarProducto.value).subscribe(response => {
       window.alert('Se creó el producto');
       this.getProductos();
-      this.service.createPrecios(precio).subscribe(response2 => {
-        this.getProductos();
-      });
     });
   }
   }

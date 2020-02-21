@@ -49,7 +49,7 @@ export class ListaClientesComponent implements OnInit {
 
 
   crear() {
-    this.service.createCliente(this.formCrear.values).subscribe(result => {
+    this.service.createCliente(this.formCrear.value).subscribe(result => {
       this.getClientes();
       window.alert('Usuario creado satisfactoriamente');
     });

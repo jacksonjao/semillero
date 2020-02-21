@@ -49,6 +49,7 @@ export class AppService {
   }
 
   createCliente(obj: object) {
+    console.log(obj);
     return this.httpClient.post(`${this.API}/cliente/crear`, obj);
   }
 
@@ -110,7 +111,7 @@ export class AppService {
   // reporte
 
   getReporte(fechasInicial: string, fechasFinal: string ) {
-    return this.httpClient.post(`${this.API}/pedido/consularByFechas`, [fechasInicial, fechasFinal]);
+    return this.httpClient.post(`${this.API}/pedido/consultarByFechas`, [fechasInicial, fechasFinal]);
   }
 
 }

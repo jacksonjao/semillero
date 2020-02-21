@@ -4,7 +4,7 @@ import { Producto } from '../../models/product';
 import { FormBuilder } from '@angular/forms';
 import { Venta } from '../../models/vender';
 import { AppService } from '../../app.service';
-import { ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute } from '@angular/router';
 import { Precio } from '../../models/precio';
 import { debug } from 'util';
 @Component({
@@ -23,12 +23,13 @@ export class DetalleProductoComponent implements OnInit {
   formVenderProducto: any;
   venta: Venta;
   idProducto: any;
-  constructor(private formBuilder: FormBuilder, private service: AppService, private router: ActivatedRoute) {
-    //this.initData();
+  constructor(private formBuilder: FormBuilder, private service: AppService, private activatedRoute: ActivatedRoute, private router: Router) {
+     this.initData();
     this.formEditarProducto = this.formBuilder.group({
       nombreProducto: '',
       descripcionProducto: '',
-      imagen: ''
+      imagen: '',
+      precio: 0
     });
 
     this.formVenderProducto = this.formBuilder.group({
@@ -44,7 +45,7 @@ export class DetalleProductoComponent implements OnInit {
       nombreProducto: 'producto: ' + 0,
       imagen: 'https://picsum.photos/200/300/?image=' + 0,
       descripcionProducto: 'descripción' + 0,
-      valor: 0
+      precio: 0
     };
 
     this.imagen = this.producto.imagen;
@@ -61,33 +62,34 @@ export class DetalleProductoComponent implements OnInit {
   ngOnInit() {
     this.modalEditar = M.Modal.init(this.modalEditarRef.nativeElement, {});
     this.modalVender = M.Modal.init(this.modalVenderRef.nativeElement, {});
-    this.idProducto = (this.router.params as any).value.id;
+    this.idProducto = (this.activatedRoute.params as any).value.id;
     this.getProducto();
   }
 
   getProducto() {
     this.service.getProductoById(this.idProducto).subscribe((data: any) => {
-      console.log(data)
+      console.log(data);
       this.producto = data;
-      this.service.getPreciosById(this.producto.idProducto).subscribe((precio: Precio) => {
-        this.producto.valor = precio.valor;
+      this.venta.idProducto = this.idProducto;
+      Object.keys(this.formEditarProducto.value).forEach(key => {
+        this.formEditarProducto.get(key).setValue(this.producto[key]);
       });
-      this.venta.idProducto = this.producto.idProducto;
-      this.venta.detallePedido = this.producto.descripcionProducto;
+
     });
   }
 
-  guardar(input: HTMLInputElement) {
-    this.service.updateProducto({ ...this.formEditarProducto.value, idProducto: this.producto.idProducto }).subscribe(response => {
+  guardar() {
+  
+    this.service.updateProducto({ ...this.formEditarProducto.value, idProducto: this.idProducto}).subscribe(response => {
       window.alert('Se actualizó correctamente');
+      this.getProducto();
     },
       error => { window.alert('Ha ocurrido un error al actualizar, revise la consola'), console.log(error); });
-
-    this.service.updatePrecios({ idProducto: this.producto.idProducto, valor: input.value });
   }
 
   vender() {
     if (this.venta.cedulaCliente !== '' && this.venta.fechaCompraPedido !== '') {
+      console.log(this.venta);
       this.service.createPedido(this.venta).subscribe(response => {
         window.alert('Se registró la venta');
       });
@@ -98,9 +100,9 @@ export class DetalleProductoComponent implements OnInit {
   }
 
   eliminar() {
-    debugger;
     this.service.deleteProducto(this.producto).subscribe(response => {
       window.alert('Se eliminó el producto');
+this.router.navigateByUrl('/');
     });
   }
 
