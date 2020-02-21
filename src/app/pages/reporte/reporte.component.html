@@ -1,17 +1,19 @@
 <div class="container">
 
-  <input  id="fecha" type="date">
-  <label for="fecha">Filtrar por fecha</label>
+  <input #FechaInicial  id="fechaInicial" type="date">
+  <label for="fechaInicial">Fecha inicial</label>
   <br>
+  <input #FechaFinal  id="fechaFinal" type="date">
+  <label for="fechaFinal">Fecha final</label>
   <br>
-  <button class="btn">Buscar</button>
+  <button class="btn" (click)="buscar(FechaInicial, FechaFinal)">Buscar</button>
 
 
   <ul class="collection">
     <li class="collection-item" >
-      <strong class="green-text">Fecha de venta: </strong>{{'Fecha'}}<br>
-      <strong class="green-text">Cliente: </strong>{{'Cliente'}}<br>
-      <strong class="green-text">precio: </strong>{{'Precio'}}<br>
+      <strong class="green-text">Fecha de venta: </strong>{{reporte.fechaCompraPedido}}<br>
+      <strong class="green-text">Cliente: </strong>{{reporte.cedulaCliente}}<br>
+      <strong class="green-text">precio: </strong>{{reporte.}}<br>
     </li>
   </ul>
 </div>
