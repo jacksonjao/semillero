@@ -57,7 +57,7 @@ export class AppService {
   }
 
   deleteCliente(obj: object) {
-    return this.httpClient.delete(`${this.API}/cliente/borrar`, obj);
+    return this.httpClient.request('delete', `${this.API}/cliente/borrar`, {body: obj});
   }
 
 
