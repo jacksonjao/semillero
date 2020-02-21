@@ -4,7 +4,7 @@
   <button class="btn" (click)="modalEditar.open()">Crear producto</button>
   <ul class="row">
   <li *ngFor="let producto of productos" class="col m6 s12 l4">
-    <a [routerLink]="'/producto/'+producto.id" > <app-card [producto]="producto"> </app-card></a>
+    <a [routerLink]="'/producto/'+producto.idProducto" > <app-card [producto]="producto"> </app-card></a>
   </li>
 </ul>
 

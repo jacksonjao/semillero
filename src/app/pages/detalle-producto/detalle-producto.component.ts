@@ -82,7 +82,7 @@ export class DetalleProductoComponent implements OnInit {
     },
       error => {window.alert('Ha ocurrido un error al actualizar, revise la consola'), console.log(error); });
 
-    this.service.updatePrecios(this.producto.idProducto, {valor:  input.value});
+    this.service.updatePrecios({idProducto: this.producto.idProducto, valor:  input.value});
   }
 
   vender() {

@@ -46,11 +46,19 @@ getPrecios() {
     });
 }
   crear() {
+    this.service.createPrecios(this.formCrear.values).subscribe(response => {
+      window.alert('Se creó satisfactoriamente');
+    });
   }
   editar(input: HTMLInputElement) {
+    this.service.updatePrecios({idPrecio: this.precioSeleccionado.idPrecio, valor: input.value}).subscribe(response => {
+      window.alert('Se creó satisfactoriamente');
+    });
   }
   borrar(id: any) {
-    console.log(id);
+    this.service.deletePrecios({idPrecio: id.value, valor: 0}).subscribe(response => {
+      window.alert('Se creó satisfactoriamente');
+    });
   }
 
 }

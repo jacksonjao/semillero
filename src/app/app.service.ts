@@ -75,7 +75,7 @@ export class AppService {
     return this.httpClient.post(`${this.API}/precios/crear`, obj);
   }
 
-  updatePrecios(id: any, obj: object) {
+  updatePrecios(obj: object) {
     return this.httpClient.put(`${this.API}/precios/actualizar`, obj);
   }
 
