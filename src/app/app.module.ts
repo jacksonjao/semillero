@@ -13,6 +13,7 @@ import { ListaClientesComponent } from './pages/lista-clientes/lista-clientes.co
 import { ListadoPreciosComponent } from './pages/listado-precios/listado-precios.component';
 import { ReporteComponent } from './pages/reporte/reporte.component';
 import {AppService} from './app.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {AppService} from './app.service';
     RouterModule,
     APP_ROUTING,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
