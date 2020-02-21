@@ -52,7 +52,7 @@ export class AppService {
     return this.httpClient.post(`${this.API}/cliente/crear`, obj);
   }
 
-  updateCliente(id: any, obj: object) {
+  updateCliente(obj: object) {
     return this.httpClient.put(`${this.API}/cliente/actualizar`, obj);
   }
 
