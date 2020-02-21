@@ -1,0 +1,11 @@
+    <div class="card card-panel hoverable">
+      <div class="card-image">
+        <img [src]="producto.imagen">
+        <span class="card-title">{{producto.nombreProducto}}</span>
+      </div>
+      <div class="card-content">
+        <p class="truncate">{{producto.descripcionProducto}}</p>
+        <p >${{producto.valor}}</p>
+      </div>
+    </div>
+

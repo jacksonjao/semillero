@@ -1,0 +1,65 @@
+<div class="container">
+  <h1 class="grey-text">Clientes</h1>
+  <button class="btn" (click)="modalCrear.open()">Crear Cliente</button>
+  <ul class="collection">
+    <li class="collection-item"  *ngFor="let cliente of clientes; let i = index" (click)="modalEditar.open(); clienteSeleccionado = cliente"><strong class="green-text">Nombre: </strong>{{cliente.nombreCliente}}<br><strong class="green-text">Cédula: </strong>{{cliente.cedulaCliente}}</li>
+  </ul>
+  </div>
+
+
+<div class="collection">
+  <a class="collection-item"  *ngFor="let cliente of clientes" (click)="modalEditar.open(); clienteSeleccionado = cliente" >Nombre: {{cliente.nombreCliente}}<br>Cédula: {{cliente.cedulaCliente}}</a>
+</div>
+
+
+<!-- Modal Structure -->
+<div #ModalCrear class="modal">
+  <div class="modal-content">
+    <h4>Crear cliente</h4>
+    <div class="row center-align">
+      <form class="col s12" [formGroup]="formCrear">
+        <div class="row">
+          <div class="input-field col s12">
+            <input  id="cedula" type="text" formControlName="cedulaCliente" >
+            <label for="cedula">Identificación</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="nombre" type="text" formControlName="nombreCliente" >
+            <label for="nombre">Nombre</label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button  class="modal-close  btn-flat">Cancelar</button>
+    <button  class="modal-close  btn-flat" (click)="crear()">Crear</button>
+  </div>
+</div>
+
+
+<!-- Modal Structure -->
+<div #ModalEditar class="modal">
+  <div class="modal-content">
+    <h4>Editar cliente</h4>
+    <div class="row center-align">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input #EditarNombre id="nombreEditar" type="text" [value]="clienteSeleccionado.nombreCliente">
+            <label for="nombreEditar">Nombre</label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button  class="modal-close  btn-flat red-text" (click)="borrar(clienteSeleccionado.cedulaCliente)">Borrar</button>
+    <button  class="modal-close  btn-flat">Cancelar</button>
+    <button  class="modal-close  btn-flat" (click)="editar(EditarNombre)">Guardar</button>
+  </div>
+</div>

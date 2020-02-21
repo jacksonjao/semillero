@@ -1,0 +1,15 @@
+
+
+.container{
+  margin-top: 1rem;
+}
+button{
+  margin-left: 1rem;
+ margin-right: 1rem;
+}
+img{
+  height: 300px;
+  width: 200px;
+  object-fit: cover;
+  border: 0.5rem solid white;
+}

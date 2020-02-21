@@ -23,9 +23,12 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/css/materialize.css",
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/js/materialize.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

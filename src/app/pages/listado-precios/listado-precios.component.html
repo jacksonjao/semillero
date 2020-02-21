@@ -1,0 +1,61 @@
+<div class="container">
+  <h1 class="grey-text">Lista de precios</h1>
+  <button class="btn" (click)="modalCrear.open()">Crear Cliente</button>
+  <ul class="collection">
+    <li class="collection-item"  *ngFor="let precio of precios; let i = index" (click)="modalEditar.open(); precioSeleccionado = precio"><strong class="green-text">Id precio: </strong>{{precio.idPrecio}}<br><strong class="green-text">Precio: </strong>{{precio.valor}}</li>
+  </ul>
+</div>
+
+
+
+<!-- Modal Structure -->
+<div #ModalCrear class="modal">
+  <div class="modal-content">
+    <h4>Crear Precio</h4>
+    <div class="row center-align">
+      <form class="col s12" [formGroup]="formCrear">
+        <div class="row">
+          <div class="input-field col s12">
+            <input  id="idPrecio" type="text" formControlName="idPrecio" >
+            <label for="idPrecio">IdPrecio</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="precio" type="text" formControlName="valor" >
+            <label for="precio">Precio</label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button  class="modal-close  btn-flat">Cancelar</button>
+    <button  class="modal-close  btn-flat" (click)="crear()">Crear</button>
+  </div>
+</div>
+
+
+<!-- Modal Structure -->
+<div #ModalEditar class="modal">
+  <div class="modal-content">
+    <h4>Editar Precio</h4>
+    <div class="row center-align">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input #EditarPrecio id="precioEditar" type="text" [value]="precioSeleccionado.valor">
+            <label for="precioEditar">Precio</label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button  class="modal-close  btn-flat red-text" (click)="borrar(precioSeleccionado.idPrecio)">Borrar</button>
+    <button  class="modal-close  btn-flat">Cancelar</button>
+    <button  class="modal-close  btn-flat" (click)="editar(EditarPrecio)">Guardar</button>
+  </div>
+</div>
