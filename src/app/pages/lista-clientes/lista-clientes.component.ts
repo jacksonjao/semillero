@@ -57,13 +57,13 @@ export class ListaClientesComponent implements OnInit {
   editar(input: HTMLInputElement) {
     this.service.updateCliente({cedulaCliente: this.clienteSeleccionado.cedulaCliente, nombreCliente: input.value}).subscribe(result => {
       this.getClientes();
-      window.alert('Usuario creado satisfactoriamente');
+      window.alert('Cliente modificado satisfactoriamente');
     });
   }
   borrar() {
     this.service.deleteCliente(this.clienteSeleccionado).subscribe(result => {
       this.getClientes();
-      window.alert('Usuario creado satisfactoriamente');
+      window.alert('Cliente Eliminado satisfactoriamente');
     });
   }
 

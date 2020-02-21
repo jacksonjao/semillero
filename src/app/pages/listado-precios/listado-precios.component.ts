@@ -42,11 +42,11 @@ export class ListadoPreciosComponent implements OnInit {
 
 getPrecios() {
     this.service.getPrecios().subscribe((response: Precio[]) => {
-      console.log(response)
       this.precios = response;
     });
 }
   crear() {
+    console.log(this.formCrear.values)
     this.service.createPrecios(this.formCrear.values).subscribe(response => {
       window.alert('Se creó satisfactoriamente');
     });
@@ -58,7 +58,7 @@ getPrecios() {
   }
   borrar(id: any) {
     this.service.deletePrecios({idPrecio: id.value, valor: 0}).subscribe(response => {
-      window.alert('Se creó satisfactoriamente');
+      window.alert('Se Eliminó satisfactoriamente');
     });
   }
 

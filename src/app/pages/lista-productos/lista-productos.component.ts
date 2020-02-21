@@ -28,8 +28,8 @@ export class ListaProductosComponent implements OnInit {
 
 
     this.formEditarProducto = this.formBuilder.group({
-      nombre: '',
-      descripcion: '',
+      nombreProducto: '',
+      descripcionProducto: '',
       imagen: ''
     });
   }
