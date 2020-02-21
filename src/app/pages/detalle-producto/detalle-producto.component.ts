@@ -66,6 +66,7 @@ export class DetalleProductoComponent implements OnInit {
 
   getProducto() {
     this.service.getProductoById(this.idProducto).subscribe((data: any) => {
+      console.log(data)
       this.producto = data;
       this.service.getPreciosById(this.producto.idProducto).subscribe((precio: Precio) => {
         this.producto.valor = precio.valor;

@@ -42,6 +42,7 @@ export class ListadoPreciosComponent implements OnInit {
 
 getPrecios() {
     this.service.getPrecios().subscribe((response: Precio[]) => {
+      console.log(response)
       this.precios = response;
     });
 }

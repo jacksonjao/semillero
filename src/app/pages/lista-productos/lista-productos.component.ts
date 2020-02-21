@@ -36,6 +36,7 @@ export class ListaProductosComponent implements OnInit {
 
   ngOnInit() {
     this.modalEditar = M.Modal.init(this.modalEditarRef.nativeElement, {});
+    this.getProductos();
   }
 
   getProductos() {
