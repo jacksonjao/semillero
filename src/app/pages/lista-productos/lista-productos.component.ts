@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Producto} from '../../models/product';
 import {FormBuilder} from '@angular/forms';
 import * as M from '../../../assets/js/materialize';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'app-lista-productos',
@@ -15,10 +16,10 @@ export class ListaProductosComponent implements OnInit {
   modalEditar: any;
   @ViewChild('ModalEditarProducto') modalEditarRef: ElementRef;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,  private service: AppService) {
     for (let i = 0; i < 100; i++) {
       this.productos. push({
-        id: i,
+        idProducto: i,
         nombreProducto: 'producto: ' + i,
         imagen: 'https://picsum.photos/200/300/?image=' + i,
         descripcionProducto: 'descripción' + i,
@@ -36,6 +37,10 @@ export class ListaProductosComponent implements OnInit {
 
   ngOnInit() {
     this.modalEditar = M.Modal.init(this.modalEditarRef.nativeElement, {});
+
+    this.service.getProductos().subscribe((response: any) => {
+      this.productos = response;
+    });
   }
 
 

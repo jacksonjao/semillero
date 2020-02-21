@@ -37,10 +37,6 @@ export class ListaClientesComponent implements OnInit {
       });
     }
 
-    this.service.getProductos().subscribe((response: any) => {
-      console.log(response);
-    });
-
   }
 
 

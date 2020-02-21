@@ -37,7 +37,7 @@ export class DetalleProductoComponent implements OnInit {
 
   initData() {
     this.producto = {
-      id: 0,
+      idProducto: 0,
       nombreProducto: 'producto: ' + 0,
       imagen: 'https://picsum.photos/200/300/?image=' + 0,
       descripcionProducto: 'descripción' + 0,
@@ -49,7 +49,7 @@ export class DetalleProductoComponent implements OnInit {
     this.venta = {
       idPedido: 0,
       cedulaCliente: '',
-      idProducto: this.producto.id,
+      idProducto: this.producto.idProducto,
       fechaCompraPedido: '',
       detallePedido: this.producto.descripcionProducto
     };
@@ -61,7 +61,7 @@ export class DetalleProductoComponent implements OnInit {
     this.router.params.subscribe((param: any) => {
       this.service.getProductoById(param.id).subscribe((data: any) => {
         this.producto = data;
-        this.venta.idProducto = this.producto.id;
+        this.venta.idProducto = this.producto.idProducto;
         this.venta.detallePedido = this.producto.descripcionProducto;
       });
     });
