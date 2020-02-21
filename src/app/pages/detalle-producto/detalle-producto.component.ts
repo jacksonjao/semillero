@@ -1,11 +1,12 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as M from 'src/assets/js/materialize.js';
-import {Producto} from '../../models/product';
-import {FormBuilder} from '@angular/forms';
-import {Venta} from '../../models/vender';
-import {AppService} from '../../app.service';
-import {ActivatedRoute} from '@angular/router';
-import {Precio} from '../../models/precio';
+import { Producto } from '../../models/product';
+import { FormBuilder } from '@angular/forms';
+import { Venta } from '../../models/vender';
+import { AppService } from '../../app.service';
+import { ActivatedRoute } from '@angular/router';
+import { Precio } from '../../models/precio';
+import { debug } from 'util';
 @Component({
   selector: 'app-detalle-producto',
   templateUrl: './detalle-producto.component.html',
@@ -22,8 +23,8 @@ export class DetalleProductoComponent implements OnInit {
   formVenderProducto: any;
   venta: Venta;
   idProducto: any;
-  constructor( private formBuilder: FormBuilder, private service: AppService, private router: ActivatedRoute) {
-    this.initData();
+  constructor(private formBuilder: FormBuilder, private service: AppService, private router: ActivatedRoute) {
+    //this.initData();
     this.formEditarProducto = this.formBuilder.group({
       nombreProducto: '',
       descripcionProducto: '',
@@ -77,22 +78,28 @@ export class DetalleProductoComponent implements OnInit {
   }
 
   guardar(input: HTMLInputElement) {
-    this.service.updateProducto({...this.formEditarProducto.value, idProducto: this.producto.idProducto}).subscribe(response => {
+    this.service.updateProducto({ ...this.formEditarProducto.value, idProducto: this.producto.idProducto }).subscribe(response => {
       window.alert('Se actualizó correctamente');
     },
-      error => {window.alert('Ha ocurrido un error al actualizar, revise la consola'), console.log(error); });
+      error => { window.alert('Ha ocurrido un error al actualizar, revise la consola'), console.log(error); });
 
-    this.service.updatePrecios({idProducto: this.producto.idProducto, valor:  input.value});
+    this.service.updatePrecios({ idProducto: this.producto.idProducto, valor: input.value });
   }
 
   vender() {
-    this.service.createPedido(this.venta).subscribe(response => {
-      window.alert('Se registró la venta');
-    });
+    if (this.venta.cedulaCliente !== '' && this.venta.fechaCompraPedido !== '') {
+      this.service.createPedido(this.venta).subscribe(response => {
+        window.alert('Se registró la venta');
+      });
+    } else {
+      alert("Campos Vacios");
+    }
+
   }
 
   eliminar() {
-    this.service.deleteCliente(this.producto).subscribe(response => {
+    debugger;
+    this.service.deleteProducto(this.producto).subscribe(response => {
       window.alert('Se eliminó el producto');
     });
   }

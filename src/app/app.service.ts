@@ -33,7 +33,7 @@ export class AppService {
   }
 
   deleteProducto(obj: object) {
-    return this.httpClient.delete(`${this.API}/producto/borrar`, obj);
+    return this.httpClient.post(`${this.API}/producto/borrar`, obj);
   }
 
 
@@ -57,7 +57,7 @@ export class AppService {
   }
 
   deleteCliente(obj: object) {
-    return this.httpClient.request('delete', `${this.API}/cliente/borrar`, {body: obj});
+    return this.httpClient.post(`${this.API}/cliente/borrar`, obj);
   }
 
 
@@ -103,7 +103,7 @@ export class AppService {
   }
 
   deletePedido(obj: object) {
-    return this.httpClient.delete(`${this.API}/pedido/borrar`, obj);
+    return this.httpClient.post(`${this.API}/pedido/borrar`, obj);
   }
 
 

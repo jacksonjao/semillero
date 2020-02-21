@@ -30,12 +30,12 @@ export class ListaClientesComponent implements OnInit {
     this.modalCrear = M.Modal.init(this.modalCrearRef.nativeElement, {});
     this.modalEditar = M.Modal.init(this.modalEditarRef.nativeElement, {});
 
-    for (let i = 0; i < 100; i++) {
+    /*for (let i = 0; i < 100; i++) {
       this.clientes. push( {
         cedulaCliente: 'Cédula' + i,
         nombreCliente: 'Nombre' + i
       });
-    }
+    }*/
 
     this.getClientes();
   }

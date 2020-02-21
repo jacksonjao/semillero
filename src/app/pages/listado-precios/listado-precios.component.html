@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="grey-text">Lista de precios</h1>
-  <button class="btn" (click)="modalCrear.open()">Crear Cliente</button>
+  <button class="btn" (click)="modalCrear.open()">Crear Precio</button>
   <ul class="collection">
     <li class="collection-item"  *ngFor="let precio of precios; let i = index" (click)="modalEditar.open(); precioSeleccionado = precio"><strong class="green-text">Id precio: </strong>{{precio.idPrecio}}<br><strong class="green-text">Precio: </strong>{{precio.valor}}</li>
   </ul>
